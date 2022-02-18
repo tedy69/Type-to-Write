@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Type To Write</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat&family=Gaegu&family=Homemade+Apple&family=Liu+Jian+Mao+Cao&family=Nanum+Brush+Script&family=Satisfy&family=Shadows+Into+Light&family=Zeyada&family=Cedarville+Cursive&display=swap"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="shortcut icon" href="./img/32.png" />
+  </head>
+
+  <body onload="init();">
+    <main class="form-container" id="top-most">
+      <!-- Head -->
+      <center>
+        <h1>
+          <font style="color: #09f">Type</font>
+          <font style="color: rgb(255, 0, 0)">To</font>
+          <font style="color: #28a745">Write</font>
+        </h1>
+        <p>
+          For all those who hate writing. Type your content in the text box
+          below and get a handwritten document at the click of a button.
+        </p>
+      </center>
+      <hr />
+      <br />
+
+      <!-- Equation Hover -->
+      <input type="text" id="eqcop" value="" />
+      <div id="equation-hover">
+        <button class="close-icon" title="Close Symbols palette">X</button>
+        <p style="color: rgb(255, 255, 0)">Symbol will be COPIED.</p>
+        <button class="matheq" value="+" onclick="eqcopier('+');">+</button>
+        <button class="matheq" value="−" onclick="eqcopier('−');">−</button>
+        <button class="matheq" value="±" onclick="eqcopier('±');">±</button>
+        <button class="matheq" value="∓" onclick="eqcopier('∓');">∓</button>
+        <button class="matheq" value="×" onclick="eqcopier('×');">×</button>
+        <button class="matheq" value="⋅" onclick="eqcopier('⋅');">⋅</button>
+        <button class="matheq" value="÷" onclick="eqcopier('÷');">÷</button>
+        <button class="matheq" value="√" onclick="eqcopier('√');">√</button>
+        <button class="matheq" value="∑" onclick="eqcopier('∑');">∑</button>
+        <button class="matheq" value="∫" onclick="eqcopier('∫');">∫</button>
+        <button class="matheq" value="∮" onclick="eqcopier('∮');">∮</button>
+        <button class="matheq" value="∴" onclick="eqcopier('∴');">∴</button>
+        <button class="matheq" value="∵" onclick="eqcopier('∵');">∵</button>
+        <button class="matheq" value="∝" onclick="eqcopier('∝');">∝</button>
+        <button class="matheq" value="∞" onclick="eqcopier('∞');">∞</button>
+        <button class="matheq" value="=" onclick="eqcopier('=');">=</button>
+        <button class="matheq" value="≠" onclick="eqcopier('≠');">≠</button>
+        <button class="matheq" value="≈" onclick="eqcopier('≈');">≈</button>
+        <button class="matheq" value="~" onclick="eqcopier('~');">~</button>
+        <button class="matheq" value="≡" onclick="eqcopier('≡');">≡</button>
+        <button class="matheq" value="⇔" onclick="eqcopier('⇔');">⇔</button>
+        <button class="matheq" value="↦" onclick="eqcopier('↦');">↦</button>
+        <button class="matheq" value="⇒" onclick="eqcopier('⇒');">⇒</button>
+        <button class="matheq" value="≅" onclick="eqcopier('≅');">≅</button>
+        <button class="matheq" value="↔" onclick="eqcopier('↔');">↔</button>
+        <button class="matheq" value="≤" onclick="eqcopier('≤');">≤</button>
+        <button class="matheq" value="≥" onclick="eqcopier('≥');">≥</button>
+        <button class="matheq" value="≪" onclick="eqcopier('≪');">≪</button>
+        <button class="matheq" value="≫" onclick="eqcopier('≫');">≫</button>
+        <button class="matheq" value="⊃" onclick="eqcopier('⊃');">⊃</button>
+        <button class="matheq" value="⊂" onclick="eqcopier('⊂');">⊂</button>
+        <button class="matheq" value="⊆" onclick="eqcopier('⊆');">⊆</button>
+        <button class="matheq" value="⊇" onclick="eqcopier('⊇');">⊇</button>
+        <button class="physeq" value="∝" onclick="eqcopier('∝');">∝</button>
+        <button class="physeq" value="β" onclick="eqcopier('β');">β</button>
+        <button class="physeq" value="γ" onclick="eqcopier('γ');">γ</button>
+        <button class="physeq" value="θ" onclick="eqcopier('θ');">θ</button>
+        <button class="chemeq" value="→" onclick="eqcopier('→');">→</button>
+        <button class="chemeq" value="⇌" onclick="eqcopier('⇌');">⇌</button>
+        <button class="chemeq" value="↑" onclick="eqcopier('↑');">↑</button>
+        <button class="chemeq" value="Δ" onclick="eqcopier('Δ');">Δ</button>
+        <br /><font style="color: rgb(0, 153, 255)">Math</font>
+        <font style="color: #563d7c">Physics</font>
+        <font style="color: rgb(84, 221, 91)">Chem</font>
+      </div>
+
+      <!-- Handwriting Selection -->
+      <div class="row responsive-row">
+        <div class="col">
+          <label for="handwriting-font" title="Set a Font Family for your text."
+            >Choose Handwriting Font</label
+          >
+          <select id="handwriting-font">
+            <option
+              default
+              value="'Homemade Apple', cursive"
+              style="font-family: Homemade Apple; font-size: 15px"
+            >
+              Homemade Apple
+            </option>
+            <option
+              value="'Cedarville Cursive', cursive"
+              style="font-family: Cedarville Cursive; font-size: 15px"
+            >
+              Cedarville
+            </option>
+            <option
+              value="'Caveat', cursive"
+              style="font-family: Caveat; font-size: 19px"
+            >
+              Caveat
+            </option>
+            <option
+              value="'Liu Jian Mao Cao', cursive"
+              style="font-family: Liu Jian Mao Cao; font-size: 19px"
+            >
+              Liu Jian Mao Cao
+            </option>
+            <option
+              value="'Shadows Into Light', cursive"
+              style="font-family: Shadows Into Light; font-size: 19px"
+            >
+              Shadows Into Light
+            </option>
+            <option
+              value="'Satisfy', cursive"
+              style="font-family: Satisfy; font-size: 17px"
+            >
+              Satisfy
+            </option>
+            <option
+              value="'Zeyada', cursive"
+              style="font-family: Zeyada; font-size: 19px"
+            >
+              Zeyada
+            </option>
+            <option
+              value="'Gaegu', cursive"
+              style="font-family: Gaegu; font-size: 19px"
+            >
+              Gaegu
+            </option>
+          </select>
+          <br />
+        </div>
+        <div class="col" style="text-align: center" id="orrer">
+          <br />
+          &#8592; OR &#8594; <br /><br />
+        </div>
+        <div class="col" style="text-align: center" id="orrerrep">
+          &#8593;<br />OR<br />&#8595;<br /><br />
+        </div>
+        <div class="col">
+          <label
+            for="font-file"
+            title="Upload a custom Font Family for your text."
+            >Use Your Own Font
+            <small
+              >(<a
+                target="_blank"
+                rel="noopener noreferer"
+                href="#how-to-add-handwriting"
+                >How to upload my own font?</a
+              >)</small
+            ></label
+          >
+          <input type="file" id="font-file" />
+        </div>
+      </div>
+
+      <br /><br />
+
+      <!-- Font Settings -->
+      <div class="row responsive-row">
+        <div class="col">
+          <label title="Select the color of your ink.">Ink Color</label>
+          <select id="ink-color" style="max-width: 70px">
+            <option default value="#000F55" style="color: rgb(13, 46, 197)">
+              Blue
+            </option>
+            <option value="#333" style="color: #333">Black</option>
+            <option value="#453F49" style="color: #453f49">Pencil</option>
+            <option value="#B20000" style="color: #b20000">Red</option>
+            <option value="#660099" style="color: #660099">Violet</option>
+            <option value="#CC4400" style="color: #cc4400">Orange</option>
+            <option value="#A18B0C" style="color: #a18b0c">Gold</option>
+            <option value="#78AE39" style="color: #78ae39">Green</option>
+          </select>
+          <br />
+        </div>
+
+        <div class="col">
+          <label for="font-size" title="Set the Font Size of your text."
+            >Font Size</label
+          ><br />
+          <input
+            type="number"
+            min="0"
+            value="12"
+            id="font-size"
+            style="max-width: 70px"
+          />
+          <br /><br />
+        </div>
+
+        <div class="col">
+          <label
+            for="top-padding"
+            title="If the text is not properly sitting on the notebook lines, adjust Vertical Adjustment."
+            >Vertical Alignment</label
+          ><br />
+          <input
+            type="number"
+            min="0"
+            value="2"
+            id="top-padding"
+            style="max-width: 70px"
+          />
+          <br /><br />
+        </div>
+
+        <div class="col">
+          <label
+            for="word-spacing"
+            title="Set the gap between words when you use space bar."
+            >Word Spacing</label
+          ><br />
+          <input
+            type="number"
+            min="0"
+            value="3"
+            id="word-spacing"
+            style="max-width: 70px"
+          />
+        </div>
+      </div>
+
+      <br /><br />
+
+      <!-- Paper Settings -->
+      <div class="row responsive-row">
+        <div class="col">
+          <label
+            for="paper-lighting-toggle"
+            title="Choose if you want to make this look like a phone-scanned document or save it as is."
+            >Natural Lighting Effect</label
+          >
+          <label class="switch-toggle outer">
+            <input id="paper-lighting-toggle" type="checkbox" checked />
+            <div></div>
+          </label>
+          <br />
+        </div>
+
+        <div class="col">
+          <label
+            for="paper-line-toggle"
+            title="Choose if you want lines on which the text sits."
+            >Notebook Lines</label
+          >
+          <label class="switch-toggle outer">
+            <input id="paper-line-toggle" type="checkbox" checked />
+            <div></div>
+          </label>
+          <br />
+        </div>
+
+        <div class="col">
+          <label
+            for="paper-margin-toggle"
+            title="Choose if you want the margins on the left and top which notebooks usually have."
+            >Notebook Margin</label
+          >
+          <label class="switch-toggle outer">
+            <input id="paper-margin-toggle" type="checkbox" />
+            <div></div>
+          </label>
+          <br />
+        </div>
+      </div>
+
+      <br /><br />
+
+      <!-- Date Settings -->
+      <div class="row responsive-row">
+        <div class="col">
+          <label
+            for="paper-date-toggle"
+            title="Choose if you want to show date in your notebook (works only when margins are active)."
+            >Show Date</label
+          >
+          <label class="switch-toggle outer">
+            <input id="paper-date-toggle" type="checkbox" />
+            <div></div>
+          </label>
+          <br />
+        </div>
+        <div class="col">
+          <label for="date-day" title="Date Day">Day</label><br />
+          <input
+            type="number"
+            min="1"
+            max="31"
+            value="1"
+            id="date-day"
+            class="date-set"
+            style="max-width: 70px"
+          />
+          <br /><br />
+        </div>
+        <div class="col">
+          <label for="date-month" title="Date Month">Month</label><br />
+          <input
+            type="number"
+            min="1"
+            max="12"
+            value="1"
+            id="date-month"
+            class="date-set"
+            style="max-width: 70px"
+          />
+          <br /><br />
+        </div>
+        <div class="col">
+          <label for="date-year" title="Date Year">Year</label><br />
+          <input
+            type="number"
+            min="1000"
+            max="9999"
+            value="2020"
+            id="date-year"
+            class="date-set"
+            style="max-width: 70px"
+          />
+          <br /><br />
+        </div>
+        <div class="col">
+          <label
+            title="Select the format of your date (DD/MM/YYYY)/(MM/DD/YYYY)."
+            >Date Format</label
+          >
+          <select id="date-format" style="max-width: 130px">
+            <option default value="day">DD/MM/YYYY</option>
+            <option value="month">MM/DD/YYYY</option>
+          </select>
+        </div>
+      </div>
+
+      <br /><br />
+
+      <!-- Command Buttons -->
+      <button class="generate-image">Write it!</button>
+      <button class="equation-palette">Equation Symbols Palette</button>
+      <a class="download-button disabled hide-mobile"
+        ><img
+          src="img/png-icon.png"
+          style="width: 32px !important; padding: 0; margin: 0"
+        />Save To PNG</a
+      >
+      <a class="pdf-button disabled hide-mobile" onclick="pdfGenerator();"
+        ><img
+          src="img/pdf-icon.png"
+          style="width: 32px !important; padding: 0; margin-right: 3px"
+        />Save To PDF</a
+      >
+
+      <br /><br /><br />
+
+      <!-- Input and Output -->
+      <div class="row output-grid responsive-row">
+        <div class="col">
+          <div class="page">
+            <div class="paper-margin-top-line">
+              <div class="textarea row">
+                <span id="date-container">
+                  <!-- Date Generates Automatically -->
+                </span>
+
+                <div class="paper-margin-left-line"></div>
+                <div id="name-note" class="name-content" contenteditable="true">
+                  Your Name <br />ID Student
+                </div>
+              </div>
+            </div>
+            <div class="textarea row">
+              <div class="paper-margin-left-line"></div>
+              <div class="paper-content" id="note" contenteditable="true">
+                <br />In this new era of typing and video games, writing
+                homework has become the new unfavorite. People cringe when asked
+                to submit a written assignment.<br /><br />If that sounds like
+                you, this is for you!<br /><br />A new, simple way of "writing"
+                assignments and "scanning" them to your teacher (aka typing your
+                notes and getting this natural, handwriting-like image which
+                looks like a scanned copy).<br /><br />Keep in mind that this is
+                an experiment, definately not production-ready. Feel free to
+                join me @GitHub and fix the bugs, make enhancements, and serve a
+                rather important section of the world's population: the
+                students!<br /><br /><br /><br /><br />Created with ♥ for
+                students.
+              </div>
+            </div>
+            <div class="overlay"></div>
+          </div>
+        </div>
+
+        <div id="output" class="col output">
+          <!-- Image Generates Automatically -->
+        </div>
+      </div>
+
+      <!-- Download Button Responsive -->
+      <br /><a class="download-button disabled hide-pc"
+        ><img
+          src="img/png-icon.png"
+          style="width: 32px !important; padding: 0; margin: 0"
+        />Save To PNG</a
+      ><br /><br />
+      <br /><a class="pdf-button disabled hide-pc" onclick="pdfGenerator();"
+        ><img
+          src="img/pdf-icon.png"
+          style="width: 32px !important; padding: 0; margin-right: 3px"
+        />Save To PDF</a
+      ><br /><br />
+
+      <!-- Personalized Handwriting Guide -->
+      <hr />
+      <div class="guide" id="how-to-add-handwriting">
+        <h2>A Guide to Personalized Handwriting</h2>
+        <ul>
+          <li>
+            To use fonts apart from those provided in this website by default,
+            or to make your own handwriting fonts, there are plenty of websites
+            and tools available.
+          </li>
+          <li>
+            To create your own font, use websites such as
+            <a
+              rel="noreferrer noopener"
+              href="https://www.calligraphr.com/en/"
+              target="_blank"
+              >Calligraphr</a
+            >. To get existing handwriting fonts, use websites such as
+            <a
+              href="https://www.urbanfonts.com/fonts/handwritten-fonts.htm"
+              target="_blank"
+              >UrbanFonts</a
+            >.
+          </li>
+          <li>Ensure that you upload fonts in TTF format.</li>
+        </ul>
+        <font style="font-weight: bold">ATTENTION!</font> The personalized
+        handwriting feature is still in BETA. Feel free to contribute on
+        <a href="https://github.com/tedy69" target="_blank"
+          ><img
+            src="img/GitHub_Logo.png"
+            style="max-width: 50px !important" /></a
+        >.
+      </div>
+      <br />
+    </main>
+
+    <!-- Info Button -->
+    <div id="info-button" onclick="infotab();" title="Information Panel">
+      <img src="img/information-button.png" alt="Information" id="info-image" />
+    </div>
+
+    <div id="info-tab" class="info-hider">
+      <center>
+        <h1>
+          <font style="color: #09f">Information</font>
+          <font style="color: rgb(255, 0, 0)">Panel</font>
+        </h1>
+        <font style="color: #28a745"
+          ><p>
+            This panel gives you information on Type To Write and its features.
+          </p></font
+        >
+      </center>
+      <hr />
+      <p>
+        Type To Write is a free text to handwriting converter online. It
+        generates a scanned-looking document which you can download as PNG or
+        PDF for your school, office, or other assignments where you want to
+        pretend that you've written your task.
+      </p>
+      <p>
+        <b>Saving The Scanned Image:</b> Type To Write allows you to save the
+        assignment as PNG or PDF. To save the scanned image as PNG (image),
+        click on the Save To PNG option. Alternatively, if you wish to save the
+        scanned image as a PDF, click on the Save To PDF button.
+      </p>
+      <p>
+        <b>Using Your Own Font:</b> In case you have made your own font, you can
+        upload it in TTF format. Alternatively, if you want some font which is
+        available for download on websites such as Google Fonts, Urban Fonts,
+        etc. and it isn't available in the Choose Handwriting Font feature, you
+        can upload that here too!
+      </p>
+      <p>
+        <b>Ink Color:</b> Choose the color of the pen with which you intend to
+        write your document.
+      </p>
+      <p><b>Font Size:</b> Set the size of the handwritten letters :p</p>
+      <p>
+        <b>Vertical Alignment:</b> If the text is not placing itself properly on
+        the notebook line, move it up or down!
+      </p>
+      <p><b>Word Spacing:</b> Set the distance between words.</p>
+      <p>
+        <b>Natural Lighting Effect:</b> Decide if your scanned image should have
+        lighting effects which make it look like a natural, phone-scanned image.
+      </p>
+      <p>
+        <b>Notebook Lines:</b> Toggle whether you want the horizontal rules to
+        show in the scanned image.
+      </p>
+      <p>
+        <b>Notebook Margin:</b> Show the pink vertical and horizontal line that
+        margins the left and top of the scanned notebook page.
+      </p>
+      <p>
+        <b>Date: </b> Choose if you want to show date in the margin cross area.
+        Choose your date format and which date you want to display!
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      Made with ♥ | Copyright &copy; <span id="year"></span>
+      <a
+        href="https://github.com/tedy69"
+        rel="noreferrer noopener"
+        target="_blank"
+        >Tedy Fazrin</a
+      >.<br />
+      Inspired by Karan Shah
+      <a
+        href="https://github.com/karanshah0206/Type-To-Write"
+        rel="noreferrer noopener"
+        target="_blank"
+        >Text To Handwriting</a
+      >.
+    </footer>
+
+    <!-- Javascript -->
+    <script defer src="./lib/html2canvas.min.js"></script>
+    <script defer src="./lib/jspdf.min.js"></script>
+    <script defer src="./js/app.js"></script>
+  </body>
+</html>
